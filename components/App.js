@@ -15,13 +15,14 @@ handleSearch: function(searchingText) {  // 1.
     this.setState({
       loading: true  // 2.
     });
-    this.getGif(searchingText, function(gif) {  // 3.
-      this.setState({  // 4
-        loading: false,  // a
-        gif: gif,  // b
-        searchingText: searchingText  // c
-      });
-    }.bind(this));
+    this.getGif(searchingText)
+      .then(function(gif) {
+        this.setState({  // 4
+          loading: false,  // a
+          gif: gif,  // b
+          searchingText: searchingText  // c
+        });
+      }.bind(this));
   },
 
   getGif: function(searchingText) {
@@ -32,7 +33,7 @@ handleSearch: function(searchingText) {  // 1.
 			xhr.open('GET', url);
 			xhr.onload = function() {
 				if (xhr.status === 200) {
-				   var data = JSON.parse(xhr.responseText).data; // 4.
+				   var data = JSON.parse(xhr.responseText).data; // 4.           
 					var gif = {  // 5.
 						url: data.fixed_width_downsampled_url,
 						sourceUrl: data.url
