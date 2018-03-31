@@ -40,7 +40,7 @@ handleSearch: function(searchingText) {  // 1.
 					};
 					resolve(gif);
 				} else {
-					reject(error)
+					reject()
 				}
 			};
 			xhr.send();
